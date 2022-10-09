@@ -1,11 +1,15 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+
+import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/users.module';
-import { OffersModule } from './offers/offers.module';
 
 @Module({
-  imports: [UsersModule, OffersModule],
+  imports: [
+    MongooseModule.forRoot(process.env.API_LINK),
+    UsersModule, 
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

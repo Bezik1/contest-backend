@@ -1,7 +1,7 @@
 import { User } from "src/schemas/user.schema";
 
-export interface UserResponse {
+export interface Response<T> {
     status: string;
     message: string
-    data?: User | User[]
+    data?: T | T[]
 }

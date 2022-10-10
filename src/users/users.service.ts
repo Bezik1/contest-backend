@@ -3,14 +3,14 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { compareSync, genSalt, hash } from 'bcrypt'
 import { UserInterface } from 'src/interfaces/user.interface';
-import { UserResponse } from 'src/interfaces/userResponse.interface';
+import { Response } from 'src/interfaces/userResponse.interface';
 import { User, UserDocument } from 'src/schemas/user.schema';
 
 @Injectable()
 export class UserService {
     constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
-    async create(createUserDto: UserInterface): Promise<UserResponse> {
+    async create(createUserDto: UserInterface): Promise<Response<User>> {
         try {
             const { username, email, password, comments } = createUserDto
 
@@ -37,7 +37,7 @@ export class UserService {
         }
     }
 
-    async finAll(): Promise<UserResponse> {
+    async finAll(): Promise<Response<User>> {
         try {
             const data = await this.userModel.find()
 
@@ -54,7 +54,7 @@ export class UserService {
         }
     }
 
-    async findById(_id: string): Promise<UserResponse> {
+    async findById(_id: string): Promise<Response<User>> {
         try {
             const data = await this.userModel.findOne({ _id }).exec()
 
@@ -71,7 +71,7 @@ export class UserService {
         }
     }
 
-    async editById(_id: string, editUserDto: UserInterface): Promise<UserResponse> {
+    async editById(_id: string, editUserDto: UserInterface): Promise<Response<User>> {
         try {
             const user = await this.userModel.findOne({ _id }).exec()
             const { username, email, password, comments } = editUserDto
@@ -99,7 +99,7 @@ export class UserService {
         }
     }
 
-    async deleteById(_id: string): Promise<UserResponse> {
+    async deleteById(_id: string): Promise<Response<User>> {
         try {
             await this.userModel.deleteOne({ _id }).exec()
 
@@ -115,7 +115,7 @@ export class UserService {
         }
     }
 
-    async login(user: UserInterface): Promise<UserResponse> {
+    async login(user: UserInterface): Promise<Response<User>> {
         try {
             const { username, email, password } = user
             const fetchedUser = await this.userModel.findOne({ username })

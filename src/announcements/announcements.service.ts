@@ -11,11 +11,13 @@ export class AnnouncementsService {
 
     async create(createAnnouncementDto: AnnouncementInterface): Promise<Response<Announcement>> {
         try {
-            const { from, content } = createAnnouncementDto
+            const { from, title, email, content } = createAnnouncementDto
 
             const data = new this.announcementModel({
                 from,
-                content
+                title,
+                email,
+                content,
             })
             
             return {
@@ -68,11 +70,13 @@ export class AnnouncementsService {
     async editById(_id: string, editAnnouncementDto: AnnouncementInterface): Promise<Response<Announcement>> {
         try {
             const Announcement = await this.announcementModel.findOne({ _id }).exec()
-            const { from, content } = editAnnouncementDto
+            const { from, email, title, content } = editAnnouncementDto
 
             const data = await Announcement.update({
                 from,
-                content
+                email,
+                title,
+                content,
             })
 
             return {

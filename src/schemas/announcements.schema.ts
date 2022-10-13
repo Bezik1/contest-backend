@@ -5,10 +5,16 @@ export type AnnouncementDocument = Announcement & Document;
 
 @Schema()
 export class Announcement {
-  @Prop({ maxlength: 20, minlength: 3 })
+  @Prop({ required: true, maxlength: 20, minlength: 3 })
   from: string;
 
-  @Prop({ maxlength: 1000, minlength: 5 })
+  @Prop({ required: true, maxlength: 30, minlength: 3 })
+  email: string
+
+  @Prop({ maxlength: 30, minlength: 3 })
+  title: string
+
+  @Prop({ required: true, maxlength: 1000, minlength: 5 })
   content: string;
 }
 

@@ -16,6 +16,11 @@ export class UserController {
         return await this.userService.finAll()
     }
 
+    @Get('names')
+    async finAllNamesEmails() {
+        return await this.userService.finAllNamesEmails()
+    }
+
     @Get(':id')
     async findQuiz(@Param('id') id: string) {
         return await this.userService.findById(id)

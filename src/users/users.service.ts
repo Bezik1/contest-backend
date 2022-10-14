@@ -5,6 +5,7 @@ import { compareSync, genSalt, hash } from 'bcrypt'
 import { UserInterface } from 'src/interfaces/user.interface';
 import { Response } from 'src/interfaces/userResponse.interface';
 import { User, UserDocument } from 'src/schemas/user.schema';
+import { Comment } from 'src/interfaces/comment.interface';
 
 @Injectable()
 export class UserService {
@@ -40,6 +41,35 @@ export class UserService {
     async finAll(): Promise<Response<User>> {
         try {
             const data = await this.userModel.find()
+
+            return {
+                status: 'succes',
+                message: 'Users got succesfully',
+                data 
+            }
+        } catch(err) {
+            return {
+                status: 'error',
+                message: `Users getting error: ${err.message}`,
+            } 
+        }
+    }
+
+    
+    async finAllNamesEmails(): Promise<Response<{ username: string, email: string, comments: Comment[] }[]>> {
+        try {
+            const users = await this.userModel.find()
+            const data:{ username: string, email: string, comments: Comment[] }[] = []
+
+            users.forEach(user =>{
+                const { username, email, comments } = user
+
+                data.push({
+                    username,
+                    email,
+                    comments,
+                })
+            })
 
             return {
                 status: 'succes',

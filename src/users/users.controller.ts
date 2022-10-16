@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Comment } from 'src/interfaces/comment.interface';
 import { UserInterface } from 'src/interfaces/user.interface';
 import { UserService } from './users.service';
 
@@ -39,5 +40,10 @@ export class UserController {
     @Post('login')
     async login(@Body() user: UserInterface) {
         return this.userService.login(user)
+    }
+
+    @Post('addComment')
+    async addComment(@Body() editUserDto: { username: string, comment: Comment }) {
+        return this.userService.addComment(editUserDto)
     }
 }

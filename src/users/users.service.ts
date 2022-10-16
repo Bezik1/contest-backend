@@ -101,6 +101,32 @@ export class UserService {
         }
     }
 
+    async addComment(editUserDto: { username: string, comment: Comment })
+                        : Promise<Response<{ username: string, comment: Comment  }>> {
+        try {
+            const { username, comment } = editUserDto
+            const user = await this.userModel.findOne({ username }).exec()
+
+            const { comments: userComments } = user
+            userComments.push(comment)
+
+            const data = await user.updateOne({
+                comments: userComments
+            })
+
+            return {
+                status:'succes',
+                message: 'User edited succesfully',
+                data
+            }
+        } catch(err) {
+            return {
+                status: 'error',
+                message: `User editing error: ${err.message}`
+            }
+        }
+    }
+
     async editById(_id: string, editUserDto: UserInterface): Promise<Response<User>> {
         try {
             const user = await this.userModel.findOne({ _id }).exec()

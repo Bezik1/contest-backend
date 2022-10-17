@@ -28,7 +28,7 @@ export class AnnouncementsService {
         } catch(err) {
             return {
                 status: 'error',
-                message: `Announcement saving error: ${err.message}`,
+                message: `Announcement saving error`,
             } 
         }
     }
@@ -45,7 +45,7 @@ export class AnnouncementsService {
         } catch(err) {
             return {
                 status: 'error',
-                message: `Announcements getting error: ${err.message}`,
+                message: `Announcements getting error`,
             } 
         }
     }
@@ -62,7 +62,7 @@ export class AnnouncementsService {
         } catch(err) {
             return {
                 status: 'error',
-                message: `Announcement getting error: ${err.message}`
+                message: `Announcement getting error`
             }
         }
     }
@@ -87,7 +87,7 @@ export class AnnouncementsService {
         } catch(err) {
             return {
                 status: 'error',
-                message: `Announcement editing error: ${err.message}`
+                message: `Announcement editing error`
             }
         }
     }
@@ -103,7 +103,7 @@ export class AnnouncementsService {
         } catch(err) {
             return {
                 status: 'error',
-                message: `Announcement deleting error ${err.message}`
+                message: `Announcement deleting error`
             }
         }
     }

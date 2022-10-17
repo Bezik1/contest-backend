@@ -33,7 +33,7 @@ export class UserService {
         } catch(err) {
             return {
                 status: 'error',
-                message: `User saving error: ${err.message}`,
+                message: `User saving error`,
             } 
         }
     }
@@ -50,7 +50,7 @@ export class UserService {
         } catch(err) {
             return {
                 status: 'error',
-                message: `Users getting error: ${err.message}`,
+                message: `Users getting error`,
             } 
         }
     }
@@ -79,7 +79,7 @@ export class UserService {
         } catch(err) {
             return {
                 status: 'error',
-                message: `Users getting error: ${err.message}`,
+                message: `Users getting error`,
             } 
         }
     }
@@ -96,7 +96,7 @@ export class UserService {
         } catch(err) {
             return {
                 status: 'error',
-                message: `User getting error: ${err.message}`
+                message: `User getting error`
             }
         }
     }
@@ -116,13 +116,13 @@ export class UserService {
 
             return {
                 status:'succes',
-                message: 'User edited succesfully',
+                message: 'Comment add succesfully',
                 data
             }
         } catch(err) {
             return {
                 status: 'error',
-                message: `User editing error: ${err.message}`
+                message: `Comment adding error`
             }
         }
     }
@@ -150,7 +150,7 @@ export class UserService {
         } catch(err) {
             return {
                 status: 'error',
-                message: `User editing error: ${err.message}`
+                message: `User editing error`
             }
         }
     }
@@ -166,7 +166,7 @@ export class UserService {
         } catch(err) {
             return {
                 status: 'error',
-                message: `User deleting error ${err.message}`
+                message: `User deleting error`
             }
         }
     }
@@ -180,10 +180,10 @@ export class UserService {
             const ifEmail =  email === fetchedUser.email ? true : false
 
             switch(true){
-                case (ifPassword === false):
-                    return { status: 'error', message: 'Incorrect password'}
                 case (ifEmail === false):
                     return { status: 'error', message: 'Incorrect email'}
+                case (ifPassword === false):
+                    return { status: 'error', message: 'Incorrect password'}
                 case (ifPassword && ifEmail):
                     return { status: 'succes', message: 'User loggined succesfully', data: 
                     await this.userModel.findOne({ _id: fetchedUser._id })}
@@ -191,7 +191,7 @@ export class UserService {
         } catch(err) {
             return {
                 status: 'error',
-                message: `User logging error: ${err.message}`
+                message: `User logging error`
             }
         }
     }
